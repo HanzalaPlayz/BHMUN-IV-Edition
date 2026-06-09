@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 
 const App: React.FC = () => {
@@ -24,21 +25,21 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
               BH
             </div>
-            <span className="font-bold text-lg text-gray-800">BHMUN</span>
+            <span className="font-bold text-lg text-gray-800 hidden sm:inline">BHMUN</span>
           </div>
           <div className="hidden md:flex space-x-8">
-            <a href="#home" className="text-gray-700 hover:text-yellow-600 transition">Home</a>
-            <a href="#about" className="text-gray-700 hover:text-yellow-600 transition">About</a>
-            <a href="#committees" className="text-gray-700 hover:text-yellow-600 transition">Committees</a>
-            <a href="#register" className="text-gray-700 hover:text-yellow-600 transition">Register</a>
-            <a href="#contact" className="text-gray-700 hover:text-yellow-600 transition">Contact</a>
+            <a href="#home" className="text-gray-700 hover:text-yellow-600 transition font-medium">Home</a>
+            <a href="#about" className="text-gray-700 hover:text-yellow-600 transition font-medium">About</a>
+            <a href="#committees" className="text-gray-700 hover:text-yellow-600 transition font-medium">Committees</a>
+            <a href="#register" className="text-gray-700 hover:text-yellow-600 transition font-medium">Register</a>
+            <a href="#contact" className="text-gray-700 hover:text-yellow-600 transition font-medium">Contact</a>
           </div>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-700"
+            className="md:hidden text-gray-700 text-2xl"
           >
             ☰
           </button>
@@ -62,53 +63,55 @@ const Hero: React.FC = () => {
       const now = new Date().getTime();
       const distance = eventDate - now;
 
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      });
+      if (distance > 0) {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
+        });
+      }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [eventDate]);
 
   return (
     <section id="home" className="pt-24 pb-16 bg-gradient-to-br from-blue-900 via-blue-800 to-yellow-600 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="mb-8 animate-bounce">
-            <div className="w-32 h-32 mx-auto bg-white rounded-full shadow-2xl p-2 flex items-center justify-center">
-              <div className="text-6xl">🦅</div>
+            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-white rounded-full shadow-2xl p-2 flex items-center justify-center">
+              <div className="text-4xl sm:text-6xl">🦅</div>
             </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4">BHMUN</h1>
-          <h2 className="text-3xl md:text-4xl font-semibold mb-2">Fourth Edition</h2>
-          <p className="text-xl mb-8 opacity-90">Burn Hall Model United Nations</p>
-          <p className="text-lg mb-12 opacity-80">Army Burn Hall College for Boys, Abbottabad</p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">BHMUN</h1>
+          <h2 className="text-2xl md:text-3xl font-semibold mb-2">Fourth Edition</h2>
+          <p className="text-lg mb-2 opacity-90">Burn Hall Model United Nations</p>
+          <p className="text-base mb-12 opacity-80">Army Burn Hall College for Boys, Abbottabad</p>
 
-          <div className="grid grid-cols-4 gap-4 mb-12 max-w-2xl mx-auto">
-            <div className="bg-white bg-opacity-20 rounded-lg p-4">
-              <div className="text-3xl font-bold">{timeLeft.days}</div>
-              <div className="text-sm">Days</div>
+          <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-12 max-w-2xl mx-auto">
+            <div className="bg-white bg-opacity-20 rounded-lg p-2 sm:p-4">
+              <div className="text-2xl sm:text-3xl font-bold">{timeLeft.days}</div>
+              <div className="text-xs sm:text-sm">Days</div>
             </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-4">
-              <div className="text-3xl font-bold">{timeLeft.hours}</div>
-              <div className="text-sm">Hours</div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-2 sm:p-4">
+              <div className="text-2xl sm:text-3xl font-bold">{timeLeft.hours}</div>
+              <div className="text-xs sm:text-sm">Hours</div>
             </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-4">
-              <div className="text-3xl font-bold">{timeLeft.minutes}</div>
-              <div className="text-sm">Minutes</div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-2 sm:p-4">
+              <div className="text-2xl sm:text-3xl font-bold">{timeLeft.minutes}</div>
+              <div className="text-xs sm:text-sm">Minutes</div>
             </div>
-            <div className="bg-white bg-opacity-20 rounded-lg p-4">
-              <div className="text-3xl font-bold">{timeLeft.seconds}</div>
-              <div className="text-sm">Seconds</div>
+            <div className="bg-white bg-opacity-20 rounded-lg p-2 sm:p-4">
+              <div className="text-2xl sm:text-3xl font-bold">{timeLeft.seconds}</div>
+              <div className="text-xs sm:text-sm">Seconds</div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <p className="text-2xl font-semibold">📅 July 11-13, 2026</p>
-            <button className="bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition text-lg">
+            <p className="text-xl sm:text-2xl font-semibold">📅 July 11-13, 2026</p>
+            <button className="bg-yellow-400 text-blue-900 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-bold hover:bg-yellow-300 transition text-base sm:text-lg">
               Register Now
             </button>
           </div>
@@ -220,20 +223,27 @@ const Committees: React.FC = () => {
 };
 
 const Registration: React.FC = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert('Thank you for registering! We will contact you soon.');
+  };
+
   return (
     <section id="register" className="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-8">Delegate Registration</h2>
-        <form className="space-y-6 bg-white bg-opacity-10 p-8 rounded-lg backdrop-blur">
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white bg-opacity-10 p-8 rounded-lg backdrop-blur">
           <div className="grid md:grid-cols-2 gap-6">
             <input
               type="text"
               placeholder="Full Name"
+              required
               className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-200 focus:outline-none focus:border-yellow-400"
             />
             <input
               type="email"
               placeholder="Email Address"
+              required
               className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-200 focus:outline-none focus:border-yellow-400"
             />
           </div>
@@ -241,18 +251,22 @@ const Registration: React.FC = () => {
             <input
               type="text"
               placeholder="School/College Name"
+              required
               className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-200 focus:outline-none focus:border-yellow-400"
             />
-            <select className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white focus:outline-none focus:border-yellow-400">
-              <option className="text-gray-900">Select Committee</option>
-              <option className="text-gray-900">UN Security Council</option>
-              <option className="text-gray-900">General Assembly</option>
-              <option className="text-gray-900">World Health Organization</option>
-              <option className="text-gray-900">UNHCR</option>
+            <select required className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white focus:outline-none focus:border-yellow-400">
+              <option className="text-gray-900" value="">Select Committee</option>
+              <option className="text-gray-900" value="security">UN Security Council</option>
+              <option className="text-gray-900" value="general">General Assembly</option>
+              <option className="text-gray-900" value="who">World Health Organization</option>
+              <option className="text-gray-900" value="unhcr">UNHCR</option>
+              <option className="text-gray-900" value="environment">Environmental Committee</option>
+              <option className="text-gray-900" value="rights">Human Rights Council</option>
             </select>
           </div>
           <textarea
             placeholder="Tell us about yourself and why you want to join BHMUN"
+            required
             className="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-gray-200 focus:outline-none focus:border-yellow-400 h-24"
           ></textarea>
           <button
